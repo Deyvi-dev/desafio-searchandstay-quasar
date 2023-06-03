@@ -36,8 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { createHouseRule } from "@/composables/api"
+import { createHouseRule, fetchHouseRules } from "@/composables/api"
 
 const dialogVisible = ref(false)
 const name = ref("")
