@@ -13,7 +13,7 @@
         </q-card-section>
 
         <q-card-section>
-          <q-form>
+          <q-form @submit="saveHouseRule">
             <q-input
               filled
               outlined
@@ -25,13 +25,8 @@
             <small>* Indicates required field</small>
 
             <div class="q-mt-md">
-              <q-btn flat label="Close" v-close-popup />
-              <q-btn
-                color="primary"
-                label="Save"
-                type="submit"
-                @click="saveHouseRule"
-              />
+              <q-btn flat label="Close" @click="closeDialog" />
+              <q-btn color="primary" label="Save" type="submit" />
             </div>
           </q-form>
         </q-card-section>
@@ -49,6 +44,10 @@ const name = ref("")
 
 const openDialog = () => {
   dialogVisible.value = true
+}
+
+const closeDialog = () => {
+  dialogVisible.value = false
 }
 
 const saveHouseRule = async () => {

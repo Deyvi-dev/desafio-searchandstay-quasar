@@ -1,46 +1,44 @@
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
-  const state = {
+export const useUserStore = defineStore('user', {
+  state: () => ({
     email: '',
     password: '',
     token: '',
-  }
+  }),
 
-  const setEmail = (email) => {
-    state.email = email
-  }
+  getters: {
+    isLoggedIn: (state) => {
+      return state.token !== ''
+    },
+  },
 
-  const setPassword = (password) => {
-    state.password = password
-  }
+  actions: {
+    setEmail(email) {
+      this.email = email
+    },
+    setPassword(password) {
+      this.password = password
+    },
+    setToken(token) {
+      this.token = token
+    },
+    login(email, password) {
+      const jwtToken = "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8"
 
-  const setToken = (token) => {
-    state.token = token
-  }
+      this.setEmail(email)
+      this.setPassword(password)
+      this.setToken(jwtToken)
+    },
+    logout() {
+      this.email = ''
+      this.password = ''
+      this.token = ''
+      localStorage.clear()
+    },
+  },
 
-  const login = (email, password) => {
-    const token = "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8"
-
-    state.email = email
-    state.password = password
-
-    localStorage.setItem("email", state.email)
-    localStorage.setItem("password", state.password)
-    localStorage.setItem("token", token)
-    state.token = token
-
-    alert(state.token)
-  }
-
-  const logout = () => {
-    localStorage.removeItem("email")
-    localStorage.removeItem("password")
-    localStorage.removeItem("token")
-    state.email = ''
-    state.password = ''
-    state.token = ''
-  }
-
-  return { state, setEmail, setPassword, setToken, login, logout }
+  persist: {
+    storage: persistedState.localStorage,
+  },
 })

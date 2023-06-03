@@ -74,7 +74,11 @@ import { useUserStore } from "@/store/user"
 const router = useRouter()
 const userStore = useUserStore()
 const leftDrawerOpen = ref(false)
-const userEmail = userStore.state.email
+
+const userString = localStorage.getItem("user")
+const { email: userEmail } = userString
+  ? JSON.parse(userString)
+  : { email: null }
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
@@ -82,6 +86,7 @@ function toggleLeftDrawer() {
 
 function logout() {
   userStore.logout()
+  localStorage.clear()
   router.push("/")
 }
 
