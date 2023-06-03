@@ -86,7 +86,6 @@ function toggleLeftDrawer() {
 
 function logout() {
   userStore.logout()
-  localStorage.clear()
   router.push("/")
 }
 

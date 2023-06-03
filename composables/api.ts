@@ -1,6 +1,4 @@
 import axios, { AxiosResponse } from "axios"
-import { useUserStore } from "@/store/user"
-const userStore = useUserStore()
 
 const userString = localStorage.getItem("user")
 const { token: token } = userString ? JSON.parse(userString) : { token: null }

@@ -1,15 +1,18 @@
 import { defineStore } from 'pinia'
 
+const userString = localStorage.getItem("user")
+const { token: token } = userString ? JSON.parse(userString) : { token: null }
 export const useUserStore = defineStore('user', {
+  
   state: () => ({
     email: '',
     password: '',
-    token: '',
+    token: token,
   }),
 
   getters: {
     isLoggedIn: (state) => {
-      return state.token !== ''
+      return state.token !== null
     },
   },
 
@@ -31,10 +34,7 @@ export const useUserStore = defineStore('user', {
       this.setToken(jwtToken)
     },
     logout() {
-      this.email = ''
-      this.password = ''
-      this.token = ''
-      localStorage.clear()
+      localStorage.clear() 
     },
   },
 

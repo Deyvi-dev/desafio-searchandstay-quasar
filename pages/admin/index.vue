@@ -46,7 +46,9 @@ interface HouseRule {
   id: number
   name: string
 }
-
+definePageMeta({
+  middleware: ["auth"],
+})
 const columns = ref<any[]>([
   {
     name: "id",
