@@ -120,11 +120,11 @@ const successPopup = ref<PopupMessage>({
 })
 
 function addPopupSucess() {
-  setSuccessPopupMessage(successPopup, "Ação realizada com sucesso")
+  setSuccessPopupMessage(successPopup, "Action performed successfully")
   showPopup.value = true
 }
 function addPopupError() {
-  setErrorPopupMessage(errorPopup, "Erro ocorreu")
+  setErrorPopupMessage(errorPopup, "error occurred")
   showPopup.value = true
 }
 
