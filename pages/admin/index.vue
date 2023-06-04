@@ -1,7 +1,13 @@
 <template>
   <div>
+    <Popup
+      :popupError="errorPopup"
+      :popupSuccess="successPopup"
+      :showPopup="showPopup"
+    />
+
     <div class="q-pa-md">
-      <CreateHouseRules />
+      <CreateHouseRules :onUpadte="onUpdate" />
       <q-table
         v-if="rows.length"
         title="House Rules"
@@ -40,15 +46,26 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-import { fetchHouseRules, deleteHouseRule } from "@/composables/api"
+import {
+  fetchHouseRules,
+  deleteHouseRule,
+} from "@/composables/useHouseRulesRequest"
+import {
+  setErrorPopupMessage,
+  setSuccessPopupMessage,
+  clearPopupMessage,
+  PopupMessage,
+} from "@/composables/popupUtils"
 
 interface HouseRule {
   id: number
   name: string
 }
+
 definePageMeta({
   middleware: ["auth"],
 })
+
 const columns = ref<any[]>([
   {
     name: "id",
@@ -81,21 +98,78 @@ const columns = ref<any[]>([
 const rows = ref<HouseRule[]>([])
 
 onMounted(async () => {
-  rows.value = await fetchHouseRules()
+  await onUpdate()
 })
 
-const deleteItem = async (id: number) => {
+const errorPopup = ref<PopupMessage>({
+  message: "",
+})
+
+const successPopup = ref<PopupMessage>({
+  message: "",
+})
+
+const showPopup = ref(false)
+function addPopupSucess() {
+  setSuccessPopupMessage(successPopup, "Ação realizada com sucesso")
+  showPopup.value = true
+}
+function addPopupError() {
+  setErrorPopupMessage(errorPopup, "Erro ocorreu")
+  showPopup.value = true
+}
+
+async function deleteItem(id: number) {
   try {
     await deleteHouseRule(id)
     rows.value = rows.value.filter((item) => item.id !== id)
+    addPopupSucess()
   } catch (error) {
+    addPopupError()
     console.error(error)
+  } finally {
+    setTimeout(() => {
+      showPopup.value = false
+      clearPopupMessage(errorPopup)
+      clearPopupMessage(successPopup)
+    }, 2000)
   }
 }
-const handleUpdate = (updatedHouseRule: HouseRule) => {
-  const index = rows.value.findIndex((item) => item.id === updatedHouseRule.id)
-  if (index !== -1) {
-    rows.value.splice(index, 1, updatedHouseRule)
+
+async function handleUpdate(updatedHouseRule: HouseRule) {
+  try {
+    const index = rows.value.findIndex(
+      (item) => item.id === updatedHouseRule.id
+    )
+    if (index !== -1) {
+      rows.value.splice(index, 1, updatedHouseRule)
+    }
+    addPopupSucess()
+  } catch (error) {
+    addPopupError()
+    console.error(error)
+  } finally {
+    setTimeout(() => {
+      showPopup.value = false
+      clearPopupMessage(errorPopup)
+      clearPopupMessage(successPopup)
+    }, 2000)
+  }
+}
+
+async function onUpdate() {
+  try {
+    rows.value = await fetchHouseRules()
+    addPopupSucess()
+  } catch (error) {
+    addPopupError()
+    console.error(error)
+  } finally {
+    setTimeout(() => {
+      showPopup.value = false
+      clearPopupMessage(errorPopup)
+      clearPopupMessage(successPopup)
+    }, 2000)
   }
 }
 </script>

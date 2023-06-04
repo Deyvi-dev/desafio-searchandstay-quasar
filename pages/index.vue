@@ -57,14 +57,13 @@ definePageMeta({
   layout: "custom",
 })
 
-const router = useRouter()
 const email = ref("")
 const password = ref("")
 const userStore = useUserStore()
 
 const handleLogin = () => {
   userStore.login(email.value, password.value)
-  router.push("/admin")
+  navigateTo("/admin")
 }
 </script>
 

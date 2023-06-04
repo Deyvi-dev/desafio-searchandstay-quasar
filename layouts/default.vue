@@ -16,6 +16,7 @@
         <q-avatar>
           <q-icon name="person" />
         </q-avatar>
+
         <div class="q-ml-sm" v-if="userEmail">
           <div>{{ userEmail }}</div>
         </div>
@@ -68,10 +69,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useRouter } from "vue-router"
 import { useUserStore } from "@/store/user"
 
-const router = useRouter()
 const userStore = useUserStore()
 const leftDrawerOpen = ref(false)
 
@@ -86,7 +85,7 @@ function toggleLeftDrawer() {
 
 function logout() {
   userStore.logout()
-  router.push("/")
+  navigateTo("/")
 }
 
 const links = ref([

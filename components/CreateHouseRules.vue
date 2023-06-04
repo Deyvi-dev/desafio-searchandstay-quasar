@@ -36,7 +36,17 @@
 </template>
 
 <script setup lang="ts">
-import { createHouseRule } from "@/composables/api"
+import {
+  createHouseRule,
+  fetchHouseRules,
+} from "@/composables/useHouseRulesRequest"
+
+const props = defineProps({
+  onUpadte: {
+    type: Function,
+    required: true,
+  },
+})
 
 const dialogVisible = ref(false)
 const name = ref("")
@@ -54,6 +64,8 @@ const saveHouseRule = async () => {
     await createHouseRule(name.value)
     name.value = ""
     dialogVisible.value = false
+    props.onUpadte()
+    await fetchHouseRules()
   } catch (error) {
     console.error(error)
   }

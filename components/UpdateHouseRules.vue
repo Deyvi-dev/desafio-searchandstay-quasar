@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { updateHouseRule } from "@/composables/api"
+import { updateHouseRule } from "@/composables/useHouseRulesRequest"
 
 const props = defineProps({
   id: {

@@ -1,14 +1,5 @@
-import axios, { AxiosResponse } from "axios"
-
-const userString = localStorage.getItem("user")
-const { token: token } = userString ? JSON.parse(userString) : { token: null }
-
-const api = axios.create({
-  baseURL: "https://sys-dev.searchandstay.com/api/admin",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-})
+import { AxiosResponse } from "axios"
+import api from "@/services/api"
 
 export async function fetchHouseRules(): Promise<any[]> {
   try {
