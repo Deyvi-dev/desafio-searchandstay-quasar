@@ -30,10 +30,10 @@ export const useUserStore = defineStore('user', {
     },
     logout() {
       localStorage.clear() 
+      this.token = ''
+      this.email = ''
     },
   },
 
-  persist: {
-    storage: persistedState.localStorage,
-  },
+  persist:  true,
 })
