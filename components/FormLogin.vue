@@ -85,18 +85,17 @@ const validateEmail = (email: string): boolean => {
   return emailRegex.test(email)
 }
 
-const handleLogin = (): void => {
-  if (isFormValid) {
-    userStore.login(email.value, password.value)
-    navigateTo("/admin")
-  }
-}
-
 const isFormValid = computed((): boolean => {
   return (
     emailRule(email.value) === true && passwordRule(password.value) === true
   )
 })
+const handleLogin = (): void => {
+  if (isFormValid) {
+    userStore.login(email.value)
+    navigateTo("/admin")
+  }
+}
 </script>
 
 <style scoped>
