@@ -1,7 +1,7 @@
 import axios from "axios"
 
-import { useUserStore } from "@/store/user"
-const userStore = useUserStore()
+import { useGlobalStore } from "~~/stores/GlobalStore"
+const userStore = useGlobalStore()
 
 const token = userStore.token
 const api = axios.create({

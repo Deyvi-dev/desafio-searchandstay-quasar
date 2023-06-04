@@ -71,9 +71,9 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useUserStore } from "@/store/user"
+import { useGlobalStore } from "@/stores/GlobalStore/index"
 
-const userStore = useUserStore()
+const userStore = useGlobalStore()
 const leftDrawerOpen = ref(false)
 
 const userString = localStorage.getItem("user")

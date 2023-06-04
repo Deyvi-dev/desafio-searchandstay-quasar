@@ -1,7 +1,7 @@
-import { useUserStore } from "@/store/user"
+import { useGlobalStore } from "@/stores/GlobalStore/index"
 
 export default defineNuxtRouteMiddleware(() => {
-  const userStore = useUserStore()
+  const userStore = useGlobalStore()
   const isLoggedIn = userStore.isLoggedIn
 
   if (!isLoggedIn) {

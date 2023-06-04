@@ -54,11 +54,11 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue"
-import { useUserStore } from "@/store/user"
+import { useGlobalStore } from "@/stores/GlobalStore/index"
 
 const email = ref("")
 const password = ref("")
-const userStore = useUserStore()
+const userStore = useGlobalStore()
 
 const emailRule = (value: string): string | true => {
   if (!value) {

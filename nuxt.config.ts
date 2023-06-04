@@ -11,11 +11,8 @@ export default defineNuxtConfig({
       fontIcons: ["material-icons"],
     },
   },
-  piniaPersistedstate: {
-    cookieOptions: {
-      sameSite: "strict",
-    },
-    storage: "localStorage",
+  pinia: {
+    autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
   },
   ssr: false,
 })
