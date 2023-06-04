@@ -6,8 +6,11 @@
       :showPopup="showPopup"
     />
 
-    <div class="q-pa-md">
+    <div class="center">
       <CreateHouseRules :onUpadte="onUpdate" />
+    </div>
+    <Skeleton :showSkeleton="showSkeleton" />
+    <div class="q-pa-md" v-if="!showSkeleton">
       <q-table
         v-if="rows.length"
         title="House Rules"
@@ -95,12 +98,19 @@ const columns = ref<any[]>([
   },
 ])
 
-const rows = ref<HouseRule[]>([])
+const showSkeleton = ref(true)
+const showPopup = ref(false)
 
 onMounted(async () => {
-  await onUpdate()
+  try {
+    await onUpdate()
+    showSkeleton.value = false
+  } catch (error) {
+    console.error(error)
+  }
 })
 
+const rows = ref<HouseRule[]>([])
 const errorPopup = ref<PopupMessage>({
   message: "",
 })
@@ -109,7 +119,6 @@ const successPopup = ref<PopupMessage>({
   message: "",
 })
 
-const showPopup = ref(false)
 function addPopupSucess() {
   setSuccessPopupMessage(successPopup, "Ação realizada com sucesso")
   showPopup.value = true
@@ -164,6 +173,7 @@ async function onUpdate() {
   } catch (error) {
     addPopupError()
     console.error(error)
+    throw new Error()
   } finally {
     setTimeout(() => {
       showPopup.value = false

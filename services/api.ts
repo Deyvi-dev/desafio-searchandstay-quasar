@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 
 import { useUserStore } from "@/store/user"
 const userStore = useUserStore()

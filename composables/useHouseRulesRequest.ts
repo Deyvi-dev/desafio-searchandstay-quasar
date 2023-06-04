@@ -22,8 +22,7 @@ export async function fetchHouseRules(): Promise<any[]> {
 
     return entities
   } catch (error) {
-    console.error(error)
-    return []
+    throw new Error()
   }
 }
 
