@@ -30,6 +30,7 @@ const triggerPositive = () => {
   $q.notify({
     type: "positive",
     message: props.popupSuccess.message,
+    classes: "some",
     timeout: 500,
   })
 }
@@ -38,6 +39,7 @@ const triggerNegative = () => {
   $q.notify({
     type: "negative",
     message: props.popupError.message,
+    classes: "some",
     timeout: 500,
   })
 }
@@ -53,3 +55,9 @@ watchEffect(() => {
   }
 })
 </script>
+<style>
+.some {
+  position: fixed;
+  top: 50%;
+}
+</style>

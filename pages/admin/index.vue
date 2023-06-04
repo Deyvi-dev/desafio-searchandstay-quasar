@@ -6,11 +6,11 @@
       :showPopup="showPopup"
     />
 
-    <div class="center">
-      <CreateHouseRules :onUpadte="onUpdate" />
-    </div>
     <Skeleton :showSkeleton="showSkeleton" />
     <div class="q-pa-md" v-if="!showSkeleton">
+      <div class="text-center">
+        <CreateHouseRules :onUpadte="onUpdate" />
+      </div>
       <q-table
         v-if="rows.length"
         title="House Rules"
@@ -28,7 +28,7 @@
                   size="sm"
                   label="Delete"
                   @click="deleteItem(row.id)"
-                  class="q-mr-sm"
+                  class="q-ml-sm q-mt-sm"
                 />
                 <UpdateHouseRules
                   :id="row.id"

@@ -5,7 +5,7 @@
       size="sm"
       label="Update"
       @click="openDialog"
-      class="q-ml-sm"
+      class="q-ml-sm q-mt-sm"
     />
     <q-dialog
       v-model="dialogVisible"

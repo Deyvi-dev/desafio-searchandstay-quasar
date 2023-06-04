@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr ">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -17,7 +17,7 @@
           <q-icon name="person" />
         </q-avatar>
 
-        <div class="q-ml-sm" v-if="userEmail">
+        <div v-if="userEmail">
           <div>{{ userEmail }}</div>
         </div>
         <q-btn
@@ -64,6 +64,8 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <Footer />
   </q-layout>
 </template>
 
