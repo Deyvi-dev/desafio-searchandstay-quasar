@@ -49,3 +49,14 @@ npm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## follow the infos here:
+
+Video link explaining the code/application:
+https://drive.google.com/file/d/1nSzT7TZLPw32GT9Hp2Uy8gdajUGmSC0S/view
+
+Application link live:
+https://main.d1yh3suhr6aayc.amplifyapp.com/
+
+project repository:
+https://github.com/Deyvi-dev/desafio-searchandstay-quasar
