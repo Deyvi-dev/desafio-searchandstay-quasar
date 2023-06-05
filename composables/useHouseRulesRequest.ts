@@ -35,8 +35,7 @@ export async function createHouseRule(name: string): Promise<any> {
   }
 
   try {
-    const response = await api.post(
-      "https://sys-dev.searchandstay.com/api/admin/house_rules",
+    const response = await api.post("/house_rules",
       requestBody
     )
 

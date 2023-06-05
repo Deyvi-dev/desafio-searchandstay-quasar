@@ -1,13 +1,17 @@
-import axios from "axios"
+import dotenv from 'dotenv';
+dotenv.config();
 
-import { useGlobalStore } from "~~/stores/GlobalStore"
-const userStore = useGlobalStore()
+import axios from 'axios';
+import { useGlobalStore } from '@/stores/GlobalStore';
 
-const token = userStore.token
+const userStore = useGlobalStore();
+const token = userStore.token;
+
 const api = axios.create({
-  baseURL: "https://sys-dev.searchandstay.com/api/admin",
+  baseURL: process.env.BASE_URL_API,
   headers: {
     Authorization: `Bearer ${token}`,
   },
-})
-export default api
+});
+
+export default api;
