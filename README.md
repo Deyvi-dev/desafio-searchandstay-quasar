@@ -1,4 +1,4 @@
-# Nuxt 3 and Quasar Framework Example
+# Nuxt 3 and Quasar
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more, and [Quasar Module for Nuxt 3](https://nuxt.com/modules/quasar)
 
