@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios"
 import api from "@/services/api"
 
 export async function fetchHouseRules(): Promise<any[]> {
+  alert(useRuntimeConfig().public.apiBase)
   try {
     const response: AxiosResponse<{
       data: { pagination: { total_pages: number }; entities: any[] }

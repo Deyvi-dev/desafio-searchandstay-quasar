@@ -5,6 +5,12 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
   ],
+  runtimeConfig: {
+    apiSecret: '', 
+    public: {
+      apiBase: 'NUXT_PUBLIC_API_BASE', 
+    }
+  },
   quasar: {
     plugins: ["Notify"],
     extras: {
@@ -14,5 +20,6 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
   },
+  
   ssr: false,
 })

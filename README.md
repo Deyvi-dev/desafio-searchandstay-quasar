@@ -17,6 +17,15 @@ npm install
 pnpm install
 ```
 
+## Environment Variables
+
+To configure the application, you can use environment variables defined in a .env file. The project relies on the dotenv package to load the environment variables from the .env file.
+
+Create a .env file at the root of the project and define the environment variables you need. For example, you can include the following line in the .env file:
+
+
+NUXT_PUBLIC_API_BASE=https://exemplo.com/api/admin
+
 ## Development Server
 
 Start the development server on http://localhost:3000
