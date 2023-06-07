@@ -76,10 +76,9 @@ import { useGlobalStore } from "@/stores/GlobalStore/index"
 const userStore = useGlobalStore()
 const leftDrawerOpen = ref(false)
 
-const userString = localStorage.getItem("user")
-const { email: userEmail } = userString
-  ? JSON.parse(userString)
-  : { email: null }
+const userEmail = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user")!).email
+  : null;
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value

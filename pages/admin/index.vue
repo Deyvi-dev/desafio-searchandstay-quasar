@@ -49,6 +49,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
+import CreateHouseRules from "@/components/requests/CreateHouseRules.vue"
+import UpdateHouseRules from "~~/components/requests/UpdateHouseRules.vue"
 import {
   fetchHouseRules,
   deleteHouseRule,

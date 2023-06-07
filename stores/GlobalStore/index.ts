@@ -1,74 +1,62 @@
-import { defineStore } from "pinia"
-const userString = localStorage.getItem("user")
-const { token: storedToken } = userString
-  ? JSON.parse(userString)
-  : { token: null }
+import { defineStore } from "pinia";
 
 interface User {
-  email: string
-  token: string
+  email: string;
+  token: string | null;
 }
 
-export const useGlobalStore = defineStore(
-  "user",
-  () => {
-    // states
-    const email = ref("")
-    const token = ref(storedToken)
+const storedToken = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user")!).token
+  : null;
 
-    // getters
-    const isLoggedIn = computed<boolean>(
-      () => token.value !== null && token.value !== ""
-    )
+export const useGlobalStore = defineStore("user", () => {
 
-    // actions
-    function setEmail(value: string): void {
-      email.value = value
-    }
+  const email = ref("");
+  const token = ref(storedToken);
 
-    function setToken(value: string): void {
-      token.value = value
-    }
 
-    function login(email: string): void {
-      const jwtToken =
-        "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8"
+  const isLoggedIn = computed<boolean>(() => !!token.value);
 
-      setEmail(email)
-      setToken(jwtToken)
-    }
-
-    function logout(): void {
-      localStorage.clear()
-    }
-
-    // watcher
-    watch(
-      [email, token],
-      () => {
-        const user: User = {
-          email: email.value,
-          token: token.value,
-        }
-        const userString = JSON.stringify(user)
-        localStorage.setItem("user", userString)
-      },
-      { deep: true }
-    )
-
-    return {
-      email,
-      token,
-      isLoggedIn,
-      setEmail,
-      setToken,
-      login,
-      logout,
-    }
-  },
-  {
-    persist: {
-      storage: persistedState.localStorage,
-    },
+  
+  function setEmail(value: string): void {
+    email.value = value;
   }
-)
+
+  function setToken(value: string): void {
+    token.value = value;
+  }
+
+  function login(email: string): void {
+    const jwtToken =
+      "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8";
+
+    setEmail(email);
+    setToken(jwtToken);
+  }
+
+  function logout(): void {
+    localStorage.removeItem("user");
+    email.value = "";
+    token.value = null;
+  }
+
+  // watcher
+  watch([email, token], () => {
+    const user: User = {
+      email: email.value,
+      token: token.value,
+    };
+    const userString = JSON.stringify(user);
+    localStorage.setItem("user", userString);
+  });
+
+  return {
+    email,
+    token,
+    isLoggedIn,
+    setEmail,
+    setToken,
+    login,
+    logout,
+  };
+});
